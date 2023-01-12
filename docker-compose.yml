@@ -1,0 +1,30 @@
+version: '3'
+services:
+  user-db:
+    image: postgres
+    container_name: user-db 
+    environment:
+      - POSTGRES_PASSWORD=user
+      - POSTGRES_USER=user
+      - POSTGRES_DB=user
+    ports:
+      - 5432:5432
+    networks:
+      - postgres-network
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=matheusarcelino@emailteste.com
+      - PGADMIN_DEFAULT_PASSWORD=Pgadmin123
+    ports:
+      - 16543:80
+    depends_on:
+      - user-db
+    networks:
+      - postgres-network            
+
+networks:
+  postgres-network:
+    driver: bridge
