@@ -28,6 +28,12 @@ public class UserController {
         return userService.get(id);
     }
 
+    @GET
+    @Path("/search-by-name")
+    public List<UserResponse> search(@QueryParam("name") String name) {
+        return userService.findByName(name);
+    }
+
     @POST
     public Response create(UserForm userForm) {
         userService.save(userForm);

@@ -44,6 +44,12 @@ public class UserService {
                 .toList();
     }
 
+    public List<UserResponse> findByName(String name) {
+        return userRepository.findByName(name).stream()
+                .map(userMapper::toUserResponse)
+                .toList();
+    }
+
     public UserResponse get(Long id) {
         var user = userRepository.findById(id);
         return userMapper.toUserResponse(user);
